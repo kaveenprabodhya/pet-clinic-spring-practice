@@ -52,7 +52,7 @@
 	</build>
 
 	<scm>
-		<developerConnection>scm:https://github.com/kthivanka/pet-clinic-spring-practice.git</developerConnection>
+		<developerConnection>scm:git:https://github.com/kthivanka/pet-clinic-spring-practice.git</developerConnection>
 	</scm>
 
 </project>
