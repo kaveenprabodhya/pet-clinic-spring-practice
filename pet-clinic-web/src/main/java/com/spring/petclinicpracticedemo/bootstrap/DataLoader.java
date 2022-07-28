@@ -1,11 +1,9 @@
-package com.spring.petclinic.bootstrap;
+package com.spring.petclinicpracticedemo.bootstrap;
 
-import com.spring.petclinic.model.Owner;
-import com.spring.petclinic.model.Vet;
-import com.spring.petclinic.services.OwnerService;
-import com.spring.petclinic.services.VetService;
-import com.spring.petclinic.services.map.OwnerServiceMap;
-import com.spring.petclinic.services.map.VetServiceMap;
+import com.spring.petclinicpracticedemo.model.Owner;
+import com.spring.petclinicpracticedemo.model.Vet;
+import com.spring.petclinicpracticedemo.services.OwnerService;
+import com.spring.petclinicpracticedemo.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
