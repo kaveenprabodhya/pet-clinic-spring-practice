@@ -1,6 +1,9 @@
 package com.spring.petclinicpracticedemo.model;
 
+import javax.persistence.Column;
+
 public class PetType extends BaseEntity {
+    @Column(name = "name")
     private String name;
 
     public String getName() {

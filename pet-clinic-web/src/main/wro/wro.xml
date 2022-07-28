@@ -1,0 +1,5 @@
+<groups xmlns="http://www.isdc.ro/wro">
+  <group name="petclinic">
+    <css>/petclinic.less</css>
+   </group>
+</groups>

@@ -2,12 +2,12 @@ package com.spring.petclinicpracticedemo.services;
 
 import com.spring.petclinicpracticedemo.model.Owner;
 
+import java.util.List;
+
+
 public interface OwnerService extends CrudService<Owner, Long> {
-    Owner findByLastname(String lastname);
 
-//    Owner findById(Long id);
+    Owner findByLastName(String lastName);
 
-//    Owner save(Owner owner);
-
-//    Set<Owner> findAll();
-}
+    List<Owner> findAllByLastNameLike(String lastName);
+ }
