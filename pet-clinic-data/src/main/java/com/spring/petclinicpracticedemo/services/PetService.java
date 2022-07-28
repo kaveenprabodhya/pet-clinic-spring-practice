@@ -1,7 +1,6 @@
-package com.spring.petclinic.services;
+package com.spring.petclinicpracticedemo.services;
 
-import com.spring.petclinic.model.Pet;
-import java.util.Set;
+import com.spring.petclinicpracticedemo.model.Pet;
 
 public interface PetService extends CrudService<Pet, Long>{
 //    Pet findById(Long id);

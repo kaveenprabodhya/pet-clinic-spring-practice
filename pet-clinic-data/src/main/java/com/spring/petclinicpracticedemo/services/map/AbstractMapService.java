@@ -1,6 +1,6 @@
-package com.spring.petclinic.services.map;
+package com.spring.petclinicpracticedemo.services.map;
 
-import com.spring.petclinic.model.BaseEntity;
+import com.spring.petclinicpracticedemo.model.BaseEntity;
 
 import java.util.*;
 

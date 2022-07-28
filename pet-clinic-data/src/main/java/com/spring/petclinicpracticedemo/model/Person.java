@@ -1,4 +1,4 @@
-package com.spring.petclinic.model;
+package com.spring.petclinicpracticedemo.model;
 
 public class Person extends BaseEntity {
     private String firstname;
