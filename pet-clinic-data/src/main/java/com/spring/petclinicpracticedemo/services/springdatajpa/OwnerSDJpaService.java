@@ -1,4 +1,4 @@
-package com.spring.petclinicpracticedemo.services.map.springdatajpa;
+package com.spring.petclinicpracticedemo.services.springdatajpa;
 
 import com.spring.petclinicpracticedemo.model.Owner;
 import com.spring.petclinicpracticedemo.repositories.OwnerRepository;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-@Profile("springdatajpa")
+@Profile("springDataJpa")
 public class OwnerSDJpaService implements OwnerService {
 
     private final OwnerRepository ownerRepository;
@@ -37,7 +37,7 @@ public class OwnerSDJpaService implements OwnerService {
 
     @Override
     public Owner findById(Long aLong) {
-        return ownerRepository.findById(aLong);
+        return ownerRepository.findById(aLong).orElse(null);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.spring.petclinicpracticedemo.services.map.springdatajpa;
+package com.spring.petclinicpracticedemo.services.springdatajpa;
 
 import com.spring.petclinicpracticedemo.model.Visit;
 import com.spring.petclinicpracticedemo.repositories.VisitRepository;
@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-@Profile("springdatajpa")
+@Profile("springDataJpa")
 public class VisitSDJpaService implements VisitService {
 
     private final VisitRepository visitRepository;
