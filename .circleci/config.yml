@@ -33,7 +33,7 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - /home/circleci/project/pet-clinic-web/target
+            - ./home/circleci/project/pet-clinic-web/target
 
 workflows:
   version: 2
