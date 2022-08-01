@@ -5,9 +5,6 @@ jobs:
     parallelism: 2 # parallel containers to split the tests among
     docker:
       - image: cimg/openjdk:17.0
-        auth:
-          username: kaveenprabodhya99
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: mvn integration-test
@@ -17,9 +14,6 @@ jobs:
   build:
     docker:
       - image: cimg/openjdk:17.0.1
-        auth:
-          username: kaveenprabodhya99
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: mvn dependency:go-offline
