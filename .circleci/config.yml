@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run: mvn test
-      - store_test_results: # We use this timing data to optimize the future runs
+      - store_test_results:
           path: target/surefire-reports
 
   build:
@@ -19,7 +19,7 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "pom.xml" }}
             - v1-dependencies-
-      - run: mvn -Dmaven.test.skip=true package
+      - run: mvn dependency:go-offline
       - save_cache:
         paths:
           - ~/.m2
