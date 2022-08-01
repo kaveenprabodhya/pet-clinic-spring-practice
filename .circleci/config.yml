@@ -11,7 +11,7 @@ jobs:
             - v1-dependencies-{{ checksum "pom.xml" }}
             - v1-dependencies-
       - attach_workspace:
-          at: ./target
+          at: ./home/circleci/project/pet-clinic-web/target/
       - run: mvn test
       - store_test_results:
           path: target/surefire-reports
@@ -33,7 +33,7 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - target/
+            - /home/circleci/project/pet-clinic-web/target
 
 workflows:
   version: 2
