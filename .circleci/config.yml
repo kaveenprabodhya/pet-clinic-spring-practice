@@ -2,12 +2,11 @@ version: 2.1
 
 jobs:
   test:
-    parallelism: 2 # parallel containers to split the tests among
     docker:
       - image: cimg/openjdk:17.0
     steps:
       - checkout
-      - run: mvn integration-test
+      - run: mvn test
       - store_test_results: # We use this timing data to optimize the future runs
           path: target/surefire-reports
 
@@ -17,8 +16,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-            keys:
-              - v1-dependencies-{{ checksum "pom.xml" }}
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-
       - run: mvn -Dmaven.test.skip=true package
       - save_cache:
         paths:
