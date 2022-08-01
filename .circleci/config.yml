@@ -16,7 +16,14 @@ jobs:
       - image: cimg/openjdk:17.0.1
     steps:
       - checkout
-      - run: mvn dependency:go-offline
+      - restore_cache:
+            keys:
+              - v1-dependencies-{{ checksum "pom.xml" }}
+      - run: mvn -Dmaven.test.skip=true package
+      - save_cache:
+        paths:
+          - ~/.m2
+        key: v1-dependencies-{{ checksum "pom.xml" }}
 
 workflows:
   version: 2
