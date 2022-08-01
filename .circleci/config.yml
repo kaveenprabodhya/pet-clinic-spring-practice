@@ -1,16 +1,12 @@
-version: 2.1
+version: 2.0
+
 jobs:
-  tests:
+  test:
+    parallelism: 2 # parallel containers to split the tests among
     docker:
-      - image: cimg/openjdk:17.0.1
+      - image: cimg/openjdk:17.0
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
-            - v1-dependencies-
-      - attach_workspace:
-          at: ./target
       - run: |
           ./mvnw \
           -Dtest=$(for file in $(circleci tests glob "src/test/**/**.java" \
@@ -18,40 +14,26 @@ jobs:
           do basename $file \
           | sed -e "s/.java/,/"; \
           done | tr -d '\r\n') \
-          -e test verify
-      - store_test_results:
+          -e test
+      - store_test_results: # We use this timing data to optimize the future runs
           path: target/surefire-reports
-      - store_artifacts:
-          path: target/site/jacoco/index.html
 
-    build:
-      docker:
-        - image: cimg/openjdk:17.0.1
-          auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      steps:
-        - checkout
-        - restore_cache:
-            keys:
-              - v1-dependencies-{{ checksum "pom.xml" }}
-              - v1-dependencies-
-        - run: ./mvnw -Dmaven.test.skip=true package
-        - save_cache:
-            paths:
-              - ~/.m2
-            key: v1-dependencies-{{ checksum "pom.xml" }}
-        - persist_to_workspace:
-            root: ./
-            paths:
-              - target/
+  build:
+    docker:
+      - image: cimg/openjdk:17.0.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: ./mvnw -Dmaven.test.skip=true package
 
-  workflows:
-    version: 2
+workflows:
+  version: 2
 
-    build-then-test:
-      jobs:
-        - build
-        - test:
-            requires:
-              - build
+  build-then-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
