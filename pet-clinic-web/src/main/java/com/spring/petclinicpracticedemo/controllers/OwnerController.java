@@ -31,11 +31,11 @@ public class OwnerController {
         return "owners/findOwners";
     }
 
-    @RequestMapping({"", "/", "/index", "/index.html"})
-    public String listOwners(Model model){
-        model.addAttribute("owners", ownerService.findAll());
-        return "owners/index";
-    }
+//    @RequestMapping({"", "/", "/index", "/index.html"})
+//    public String listOwners(Model model){
+//        model.addAttribute("owners", ownerService.findAll());
+//        return "owners/index";
+//    }
 
     @GetMapping
     public String processFindForm(Owner owner, BindingResult result, Model model){
