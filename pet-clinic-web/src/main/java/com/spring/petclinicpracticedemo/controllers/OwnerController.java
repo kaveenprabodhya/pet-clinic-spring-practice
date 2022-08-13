@@ -3,6 +3,7 @@ package com.spring.petclinicpracticedemo.controllers;
 import com.spring.petclinicpracticedemo.services.OwnerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -10,6 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class OwnerController {
     private final OwnerService ownerService;
+
+    @InitBinder
+    public void setAllowedFields(WebDataBinder dataBinder) {
+        dataBinder.setDisallowedFields("id");
+    }
 
     public OwnerController(OwnerService ownerService) {
         this.ownerService = ownerService;
