@@ -1,5 +1,6 @@
 package com.spring.petclinicpracticedemo.controllers;
 
+import com.spring.petclinicpracticedemo.model.Owner;
 import com.spring.petclinicpracticedemo.services.OwnerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,8 @@ public class OwnerController {
 
     @RequestMapping("/find")
     public String findOwners(Model model){
-        return "notimplemented";
+        model.addAttribute("owner", Owner.builder().build());
+        return "owners/findOwners";
     }
 
     @RequestMapping({"", "/", "/index", "/index.html"})
