@@ -33,7 +33,6 @@ class OwnerControllerTest {
     @InjectMocks
     OwnerController ownerController;
     Set<Owner> owners;
-
     MockMvc mockMvc;
 
     @BeforeEach
@@ -54,27 +53,6 @@ class OwnerControllerTest {
 
         verifyNoInteractions(ownerService);
     }
-
-//    @Test
-//    void listOwners() throws Exception {
-//        when(ownerService.findAll()).thenReturn(owners);
-//        mockMvc
-//                .perform(get("/owners"))
-////                .andExpect(status().is(200));
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("owners/index"))
-//                .andExpect(model().attribute("owners", hasSize(2)));
-//    }
-
-//    @Test
-//    void listOwnersByIndex() throws Exception {
-//        when(ownerService.findAll()).thenReturn(owners);
-//        mockMvc
-//                .perform(get("/owners"))
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("owners/index"))
-//                .andExpect(model().attribute("owners", hasSize(2)));
-//    }
 
     @Test
     void processFindFormReturnMany() throws Exception {
@@ -100,14 +78,14 @@ class OwnerControllerTest {
     @Test
     void processFindFormEmptyReturnMany() throws Exception {
         when(ownerService.findAllByLastNameLike(anyString()))
-                .thenReturn(Arrays.asList(Owner.builder().id(1l).build(),
-                        Owner.builder().id(2l).build()));
+                .thenReturn(Arrays.asList(Owner.builder().id(1L).build(),
+                        Owner.builder().id(2L).build()));
 
         mockMvc.perform(get("/owners")
                         .param("lastName",""))
                 .andExpect(status().isOk())
                 .andExpect(view().name("owners/ownersList"))
-                .andExpect(model().attribute("selections", hasSize(2)));;
+                .andExpect(model().attribute("selections", hasSize(2)));
     }
 
     @Test
@@ -132,7 +110,7 @@ class OwnerControllerTest {
 
     @Test
     void processCreationForm() throws Exception {
-        when(ownerService.save(ArgumentMatchers.any())).thenReturn(Owner.builder().id(1l).build());
+        when(ownerService.save(ArgumentMatchers.any())).thenReturn(Owner.builder().id(1L).build());
 
         mockMvc.perform(post("/owners/new"))
                 .andExpect(status().is3xxRedirection())
@@ -144,19 +122,19 @@ class OwnerControllerTest {
 
     @Test
     void initUpdateOwnerForm() throws Exception {
-        when(ownerService.findById(anyLong())).thenReturn(Owner.builder().id(1l).build());
+        when(ownerService.findById(anyLong())).thenReturn(Owner.builder().id(1L).build());
 
         mockMvc.perform(get("/owners/1/edit"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("owners/createOrUpdateOwnerForm"))
                 .andExpect(model().attributeExists("owner"));
 
-        verifyNoInteractions(ownerService);
+        verifyNoMoreInteractions(ownerService);
     }
 
     @Test
     void processUpdateOwnerForm() throws Exception {
-        when(ownerService.save(ArgumentMatchers.any())).thenReturn(Owner.builder().id(1l).build());
+        when(ownerService.save(ArgumentMatchers.any())).thenReturn(Owner.builder().id(1L).build());
 
         mockMvc.perform(post("/owners/1/edit"))
                 .andExpect(status().is3xxRedirection())
