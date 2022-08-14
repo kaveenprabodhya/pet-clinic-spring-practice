@@ -14,6 +14,7 @@ import java.util.List;
 @RequestMapping("/owners")
 @Controller
 public class OwnerController {
+    private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
     private final OwnerService ownerService;
 
     @InitBinder
@@ -41,7 +42,7 @@ public class OwnerController {
     public String processFindForm(Owner owner, BindingResult result, Model model){
         // allow parameterless GET request for /owners to return all records
         if (owner.getLastName() == null) {
-            owner.setLastName(""); // empty string signifies broadest possible search
+            owner.setLastName(""); // empty string signifies the broadest possible search
         }
 
         // find owners by last name
@@ -68,6 +69,39 @@ public class OwnerController {
         ModelAndView mav = new ModelAndView("owners/ownerDetails");
         mav.addObject(ownerService.findById(ownerId));
         return mav;
+    }
+
+    @GetMapping("/new")
+    public String initCreationForm(Model model) {
+        model.addAttribute("owner", Owner.builder().build());
+        return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+    }
+
+    @PostMapping("/new")
+    public String processCreationForm(Owner owner, BindingResult result) {
+        if (result.hasErrors()) {
+            return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+        } else {
+            Owner savedOwner =  ownerService.save(owner);
+            return "redirect:/owners/" + savedOwner.getId();
+        }
+    }
+
+    @GetMapping("/{ownerId}/edit")
+    public String initUpdateOwnerForm(@PathVariable Long ownerId, Model model) {
+        model.addAttribute(ownerService.findById(ownerId));
+        return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+    }
+
+    @PostMapping("/{ownerId}/edit")
+    public String processUpdateOwnerForm(Owner owner, BindingResult result, @PathVariable Long ownerId) {
+        if (result.hasErrors()) {
+            return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+        } else {
+            owner.setId(ownerId);
+            Owner savedOwner = ownerService.save(owner);
+            return "redirect:/owners/" + savedOwner.getId();
+        }
     }
 
 }
