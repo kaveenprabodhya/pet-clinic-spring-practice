@@ -16,9 +16,9 @@
 	</parent>
 
 	<groupId>com.spring</groupId>
-	<artifactId>petclinic</artifactId>
+	<artifactId>pet-clinic-practice-demo</artifactId>
 	<version>0.0.3-SNAPSHOT</version>
-	<name>petclinic</name>
+	<name>pet-clinic-practice-demo</name>
 	<description>Demo project for pet clinic</description>
 
 	<properties>
